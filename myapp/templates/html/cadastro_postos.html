@@ -13,6 +13,7 @@
                     {{form.as_p}}
                     </div>
                     <button type="submit" class="btn btn-primary">Criar</button>
+                    <a href="{% url 'home'%}"class="btn btn-light btn-sm">voltar</a>
                 </form>
             </div>
     <div class="col-sm-8">
@@ -42,6 +43,7 @@
                         <form action="{% url 'deletar-clinica' item.id %}" method="post" class="d-inline">{% csrf_token %}
                             <input type="submit" class="btn btn-danger" value="Deletar">
                         </form>
+
                     </td>
                     </tr>
                 {% endfor %}

@@ -1,46 +1,55 @@
 {% extends "base.html" %}
 
-{% block title %} Home {%  endblock title %}
+{% block title %} Folga {%  endblock title %}
 
 
 {% block content %} 
     <div class="container">
         <div class="row">
         <div class="col">
-            <h4 class="text-center alert alert-info">Cadastro de medicos</h4>
+            <h4 class="text-center alert alert-info">Cadastro de Folgas</h4>
             <form method="post">{% csrf_token %}
                 <div class="form-group">
-                {{form.as_p}}
+                <label>Nome</label>
+                <select name="nome" required="" id="id_nome">
+                <option value="" selected="">---------</option>
+                {% for i in medicos%}
+                <option value="{{i.nome}}">{{i.nome}} {{i.sobrenome}}</option>
+                {%endfor%}
+                </select>
                 </div>
+                <label>Data da Folga</label>
+                {{form.data_da_folga}}
+                
                 <button type="submit" class="btn btn-primary">Criar</button>
                 <a href="{% url 'home'%}"class="btn btn-light btn-sm">voltar</a>
+                
             </form>
 
         </div>
 
     <div class="col-sm-8">
-    <h4 class="text-center alert alert-info">Tabela</h4>
-    {% if listar %}
+    <h4 class="text-center alert alert-info">Tabela de folgas</h4>
+    {% if folga %}
     <div> 
     <table class="table table-hover">
         <thead class="thead-light">
             <tr>
                 <th scope='col'>ID</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Data de admissão</th>
+                <th scope="col">Data da Folga</th>
                 <th scope="col">Ação</th>
 
             </tr>
             </thead>
             <tbody>
-                {% for item in listar %}
+                {% for item in folga %}
                 
                     <tr>
                     <td>{{item.id}}</td>
-                    <td>{{item.nome}} {{item.sobrenome}}</td>
-                    <td>{{item.data_de_admissao}}</td>
+                    <td>{{item.nome}}</td>
+                    <td>{{item.data_da_folga}}</td>
                     <td>
-                        <a href="{% url 'editar-medico' item.id%}"class="btn btn-warning btn-sm">Editar</a>
                         <form action="{% url 'deletar' item.id %}" method="post" class="d-inline">{% csrf_token %}
                             <input type="submit" class="btn btn-danger" value="Deletar">
                         </form>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %} Cadastro de tabela{%  endblock title %}
+
+
+{% block content %} 
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h4 class="text-center alert alert-info">Cadastro de Postos</h4>
+                <form method="post">{% csrf_token %}
+                    <div class="form-group">
+                            <label>Nome</label>
+                            <select name="nome" required="" id="id_nome">
+                                <option value="" selected="">---------</option>
+                                {% for i in medicos%}
+                                    <option value="{{i.nome}}">{{i.nome}}</option>
+                                {%endfor%}
+                            </select>
+                            <label>Nome da Clínica</label>
+                            <select name="nome_do_posto" required="" id="id_nome_do_posto">
+                            <option value="" selected="">---------</option>
+                            {% for i in clinica%}
+                            <option value="{{i.nome_do_posto}}">{{i.nome_do_posto}}</option>
+                            {%endfor%}
+                            </select>
+
+                            {{form.data_de_trabalho}}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Criar</button>
+                    <a href="{% url 'home'%}"class="btn btn-light btn-sm">voltar</a>
+                </form>
+            </div>
+        <div>
+    </div>
+{% endblock content %}

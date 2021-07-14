@@ -1,6 +1,7 @@
 from django import forms
 from django.core import validators
-from .models import Medico, PostodeTrabalho
+from django.forms import fields
+from .models import Medico, PostodeTrabalho, TabeladeHorario, TabelaFolga
 
 class MedicoForms(forms.ModelForm):
     class Meta:
@@ -13,4 +14,15 @@ class LocalPostoForms(forms.ModelForm):
         model = PostodeTrabalho
         fields = ['nome_do_posto', 'endereco']
         
+        
+        
+class TabelaForms(forms.ModelForm):
+    class Meta:
+        model = TabeladeHorario
+        fields = '__all__'
+
+class TabelaFolgaForms(forms.ModelForm):
+    class Meta:
+        model = TabelaFolga
+        fields = '__all__'
         

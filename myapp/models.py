@@ -1,10 +1,10 @@
 from django.db import models
 
 class Medico(models.Model): 
-   
-    nome = models.CharField(max_length=45, blank=False, null=False)
-    sobrenome = models.CharField(max_length=30, blank=False, null=False)
     
+    nome = models.CharField(max_length=45, blank=False, null=False) 
+    sobrenome = models.CharField(max_length=30, blank=False, null=False)
+            
     data_de_admissao = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
@@ -14,3 +14,14 @@ class PostodeTrabalho(models.Model):
     nome_do_posto = models.CharField(max_length=55, blank=False, null=False)
     endereco = models.CharField(max_length=55, blank=False, null=False)
     
+class TabeladeHorario(models.Model):
+
+    nome_do_posto = models.CharField(max_length=55, blank=False, null=False)
+    data_de_trabalho = models.DateField()
+    nome = models.CharField(max_length=45, blank=False, null=False)
+    sobrenome = models.CharField(max_length=30, blank=True, null=True)
+    
+class TabelaFolga(models.Model):
+    nome = models.CharField(max_length=45)
+    data_da_folga = models.DateField()
+        
