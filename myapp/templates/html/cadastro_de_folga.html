@@ -19,8 +19,8 @@
                 </select>
                 </div>
                 <label>Data da Folga</label>
-                {{form.data_da_folga}}
-                
+                <input type="date" name="data_da_folga" required="" id="id_data_da_folga">
+                <br>
                 <button type="submit" class="btn btn-primary">Criar</button>
                 <a href="{% url 'home'%}"class="btn btn-light btn-sm">voltar</a>
                 
@@ -50,7 +50,7 @@
                     <td>{{item.nome}}</td>
                     <td>{{item.data_da_folga}}</td>
                     <td>
-                        <form action="{% url 'deletar' item.id %}" method="post" class="d-inline">{% csrf_token %}
+                        <form action="{% url 'deletar-folga' item.id %}" method="post" class="d-inline">{% csrf_token %}
                             <input type="submit" class="btn btn-danger" value="Deletar">
                         </form>
                     </td>

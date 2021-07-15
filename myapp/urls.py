@@ -16,7 +16,9 @@ urlpatterns = [
     path('deletar-clinica/<int:id>/', views.deletar_clinica, name='deletar-clinica'),
     
     path('cadastro-de-tabela', views.cadastro_de_tabela, name='cadastro-de-tabela'),
+    path('editar-tabela/<int:id>/', views.editar_tabela, name='editar-tabela'),
     
-    path('cadastro-de-folga', views.cadastro_folga, name='cadastro-de-folga')
+    path('cadastro-de-folga', views.cadastro_folga, name='cadastro-de-folga'),
+    path('deletar-folga/<int:id>/', views.deletar_folga, name='deletar-folga')
    
 ]

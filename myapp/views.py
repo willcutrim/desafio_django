@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render, HttpResponseRedirect
 from .forms import MedicoForms, LocalPostoForms, TabelaForms, TabelaFolgaForms
 from .models import Medico, PostodeTrabalho, TabeladeHorario, TabelaFolga
+import datetime
 
 
 def deletar_horario(request, id):
@@ -12,11 +13,13 @@ def deletar_horario(request, id):
 
 def home(request):
     listar = Medico.objects.all()
-    horario = TabeladeHorario.objects.filter()[:5]
+    horario = TabeladeHorario.objects.filter()#[:5]
     start_date = request.GET.get('data_inicial')
     end_date = request.GET.get('data_final')
     
+    
     if start_date and end_date:
+        print(start_date)
         horario = TabeladeHorario.objects.filter(data_de_trabalho__range=[start_date, end_date])
     return render(request, 'html/home.html', {'listar': listar, 'horario': horario})
 
@@ -85,7 +88,6 @@ def deletar_clinica(request, id):
 def cadastro_de_tabela(request):
     horario = TabeladeHorario.objects.all()
     medicos = Medico.objects.all()
-    folga = TabelaFolga.objects.all()
     clinica = PostodeTrabalho.objects.all()
     if request.method == 'POST':
         form = TabelaForms(request.POST)
@@ -94,11 +96,25 @@ def cadastro_de_tabela(request):
             form.save()
             print('cadastrou lindamente')
         else:
-            print('deu gongo')
+            print('deu errado aí mano!!')
     else:
         form = TabelaForms()
     
     return render(request, 'html/cadastro_tabela.html', {'form': form, 'medicos': medicos, 'clinica': clinica, 'horario':horario})
+
+def editar_tabela(request, id):
+    tabela = TabeladeHorario.objects.get(pk=id)
+    medicos = Medico.objects.all()
+    clinica = PostodeTrabalho.objects.all()
+    if request.method == 'POST':
+        form = TabelaForms(request.POST, instance=tabela)
+        if form.is_valid():
+            form.save()
+    else:
+        tabela = TabeladeHorario.objects.get(pk=id)
+    form = TabelaForms(instance=tabela)
+    return render(request, 'html/editar_tabela.html', {'form': form, 'tabela': tabela, 'medicos':medicos, 'clinica': clinica})
+    
 
 def cadastro_folga(request):
     folga = TabelaFolga.objects.all()
@@ -116,3 +132,8 @@ def cadastro_folga(request):
     return render(request, 'html/cadastro_de_folga.html', {'folga': folga, 'form': form, 'medicos': medicos})
 
 
+def deletar_folga(request, id):
+    if request.method == 'POST':
+        folga = TabelaFolga.objects.get(pk=id)
+        folga.delete()
+        return redirect('/cadastro-de-folga')

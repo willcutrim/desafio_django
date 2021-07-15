@@ -15,7 +15,6 @@ class PostodeTrabalho(models.Model):
     endereco = models.CharField(max_length=55, blank=False, null=False)
     
 class TabeladeHorario(models.Model):
-
     nome_do_posto = models.CharField(max_length=55, blank=False, null=False)
     data_de_trabalho = models.DateField()
     nome = models.CharField(max_length=45, blank=False, null=False)
