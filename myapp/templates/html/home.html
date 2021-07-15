@@ -7,21 +7,23 @@
     <div class="container">
     <div class="form-group">
     
-    <!--
-        <select class="form-control" id="exampleFormControlSelect1">
-            {%for i in horario%}
-                <option>{{i.nome}}</option>
-            {%endfor %}
-        </select>
-    -->
         <a href="{% url 'cadastro-de-clinica' %}"class="btn btn-outline-primary">Cadasstro de clinica</a>
         <a href="{% url 'cadastro-de-medico' %}"class="btn btn-outline-primary">Cadastro de médico</a>
         <a href="{% url 'cadastro-de-tabela' %}"class="btn btn-outline-primary">Cadastro de tabela</a>
     </div>
+    
     </div>
 
     <div>
     <h4 class="text-center alert alert-info">Tabela de Horários</h4>
+    <div class="col-md-8">
+        <form class="form-inline my-2 my-gl-0 pull-right">
+        <label>Data Inicial</label>
+        <input name="data_inicial" class="form-control ml-sm-2 mr-sm-2" type="date">
+        <label>data final</label>
+        <input name="data_final" class="form-control ml-sm-2 mr-sm-2" type="date">
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">Ok</button>
+    </div>
     {% if horario %}
     <div> 
     <table class="table table-hover">

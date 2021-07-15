@@ -12,7 +12,12 @@ def deletar_horario(request, id):
 
 def home(request):
     listar = Medico.objects.all()
-    horario = TabeladeHorario.objects.all()[:5]
+    horario = TabeladeHorario.objects.filter()[:5]
+    start_date = request.GET.get('data_inicial')
+    end_date = request.GET.get('data_final')
+    
+    if start_date and end_date:
+        horario = TabeladeHorario.objects.filter(data_de_trabalho__range=[start_date, end_date])
     return render(request, 'html/home.html', {'listar': listar, 'horario': horario})
 
 def cadastro_de_medicos(request):
